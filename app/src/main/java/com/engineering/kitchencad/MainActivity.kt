@@ -42,7 +42,7 @@ fun KitchenCADScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("KitchenCAD 3D Pro - CAD Engine") },
+                title = { Text("KitchenCAD 3D Pro") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
                 )
@@ -83,7 +83,6 @@ fun KitchenCADScreen() {
                 val startX = offset.x % gridStep
                 val startY = offset.y % gridStep
 
-                // Draw 2D Grid
                 var x = startX
                 while (x < size.width) {
                     drawLine(Color.LightGray.copy(alpha = 0.5f), Offset(x, 0f), Offset(x, size.height), 1f)
@@ -95,11 +94,9 @@ fun KitchenCADScreen() {
                     y += gridStep
                 }
 
-                // Draw Sample CAD Kitchen Layout
                 val cx = size.width / 2f + offset.x
                 val cy = size.height / 2f + offset.y
 
-                // Outer Walls
                 drawRect(
                     color = Color.DarkGray,
                     topLeft = Offset(cx - 300f * scale, cy - 200f * scale),
@@ -107,27 +104,18 @@ fun KitchenCADScreen() {
                     style = Stroke(width = 4f * scale)
                 )
 
-                // Base Cabinets
                 drawRect(
                     color = Color.Blue,
                     topLeft = Offset(cx - 280f * scale, cy + 120f * scale),
                     size = Size(250f * scale, 60f * scale)
                 )
 
-                // Kitchen Island / Counter
                 drawRect(
                     color = Color.Magenta,
                     topLeft = Offset(cx - 80f * scale, cy - 60f * scale),
                     size = Size(160f * scale, 100f * scale)
                 )
             }
-
-            Text(
-                text = "Tool: $activeTool | Zoom: ${String.format("%.2f", scale)}x",
-                modifier = Modifier
-                    .padding(16.dp),
-                color = MaterialTheme.colorScheme.onSurface
-            )
         }
     }
 }
